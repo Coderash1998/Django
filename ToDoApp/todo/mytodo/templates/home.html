@@ -23,9 +23,10 @@
         </div>
         <div class="row ">
             <div class="col-12">
-                <form class="row g-3 justify-content-center">
+                <form class="row g-3 justify-content-center" action="add_todo/" method="POST">
+                    {% csrf_token z%}
                     <div class="col-auto">
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter your Todo">
+                        {{ form.todo_text}}
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="mx-2 btn btn-primary">Submit</button>
@@ -37,13 +38,19 @@
             <div class="col-12 table-responsive">                
                 <table class="table">
                     <tbody>
+                        {% for todo in todo_list %}
                         <tr>
-                            <td>This is our todo</td>
+                            <td>
+                                <p> {{ todo.todo_text }}</p>
+                                <p class="text-muted"><small>Added on: {{ todo.added_on }}</small></p>
+                                <p class="text-muted"><small>Updated on: {{ todo.updated_on }}</small></p>
+                            </td>
                             <div class="nav justify-content-end">
                                 <td><button type="submit" class="mx-2 btn btn-danger">DELETE</button></td>
                                 <td><button type="submit" class="mx-2 btn btn-info">EDIT</button></td>
                             </div>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
